@@ -14,6 +14,7 @@ else:
 FONT_PATH = os.path.join(BASE_DIR, "resources", "PingFang.ttc")  # 請確定這個字型檔存在
 
 LOGO_FILENAME = os.path.join(BASE_DIR, "resources", "logo.png")
+
 texts_to_add = [
     {"text": "LIND ID: burceet", "offset_y": 150, "color": "red","align": "center"},
     {"text": "【台南,高雄,嘉義,屏東市,大台北到府維修】", "offset_y": 280, "color": "yellow","fontsize":55,"align": "left"},

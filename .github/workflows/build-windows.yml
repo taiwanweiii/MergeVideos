@@ -25,7 +25,7 @@ jobs:
     - name: Build EXE with PyInstaller
       run: |
         # 黑視窗版本，EXE 不包含資源
-        pyinstaller --console --onefile Main.py
+        pyinstaller --console Main.py
         dir dist
 
     - name: Upload artifact
