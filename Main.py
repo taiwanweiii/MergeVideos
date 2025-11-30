@@ -8,7 +8,7 @@ import traceback
 # ================= 設定區 (Mac 專用修訂版) =================
 # PyInstaller 會把程式打包成 exe，資源會放在 _MEIPASS
 if getattr(sys, 'frozen', False):
-    BASE_DIR = sys._MEIPASS
+    BASE_DIR = os.path.dirname(sys.executable)  # exe 所在資料夾
 else:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     
