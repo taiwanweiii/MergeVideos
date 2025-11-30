@@ -38,6 +38,8 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         tag_name: v202511301900  # 固定 tag
+        allow_updates: true   # 允許更新已存在 release
+
         files: dist/Main.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
