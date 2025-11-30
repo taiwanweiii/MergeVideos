@@ -3,13 +3,17 @@ import sys
 from moviepy.editor import *
 
 # ================= 設定區 (Mac 專用修訂版) =================
-
+# PyInstaller 會把程式打包成 exe，資源會放在 _MEIPASS
+if getattr(sys, 'frozen', False):
+    BASE_DIR = sys._MEIPASS
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    
 # 1. 設定中文字型
 # Mac 建議使用 'Arial Unicode MS' 或 'PingFang TC'
-FONT_PATH = "/System/Library/Fonts/PingFang.ttc"
+FONT_PATH = os.path.join(BASE_DIR, "resources", "PingFang.ttc")  # 請確定這個字型檔存在
 
-LOGO_FILENAME = "logo.png"  # 右下角圖片的檔名
-OUTPUT_FILENAME = "final_output.mp4"
+LOGO_FILENAME = os.path.join(BASE_DIR, "resources", "logo.png")
 texts_to_add = [
     {"text": "LIND ID: burceet", "offset_y": 150, "color": "red","align": "center"},
     {"text": "【台南,高雄,嘉義,屏東市,大台北到府維修】", "offset_y": 280, "color": "yellow","fontsize":55,"align": "left"},

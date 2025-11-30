@@ -24,22 +24,15 @@ jobs:
 
     - name: Build EXE with PyInstaller
       run: |
-        # 黑視窗版本
+        # 黑視窗版本，EXE 不包含資源
         pyinstaller --console --onefile Main.py
         dir dist
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: windows-exe
-        path: dist/Main.exe
-
-    - name: Create Release and Upload EXE
-      uses: softprops/action-gh-release@v2
-      with:
-        tag_name: v202511301900  # 固定 tag
-        overwrite: true   # 覆蓋已存在 release
-
-        files: dist/Main.exe
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        name: windows-build
+        # 上傳整個資料夾，包含 EXE 與 resources
+        path: |
+          dist/Main.exe
+          resources/
