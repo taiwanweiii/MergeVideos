@@ -23,7 +23,7 @@ jobs:
 
     - name: Build EXE with PyInstaller
       run: |
-        pyinstaller --onefile --console Main.py --add-data "resources/PingFang.ttc;resources" --add-data "resources/logo.png;resources"
+        pyinstaller --console Main.py --add-data "resources/PingFang.ttc;resources" --add-data "resources/logo.png;resources"
         dir dist
 
     - name: Upload artifact
