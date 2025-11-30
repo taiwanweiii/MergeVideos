@@ -44,8 +44,10 @@ jobs:
       run: |
         $TAG_NAME = "v$(Get-Date -Format 'yyyyMMddHHmmss')"
         echo "TAG_NAME=$TAG_NAME" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
         git tag $TAG_NAME
-        git push origin $TAG_NAME
+        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} $TAG_NAME
 
     - name: Create Release and Upload EXE
       uses: softprops/action-gh-release@v1
