@@ -1,9 +1,7 @@
 name: Build Windows EXE
 
 on:
-  push:
-    branches: [ "main" ]
-  workflow_dispatch:
+  workflow_dispatch:  # 手動觸發
 
 jobs:
   build:
@@ -26,14 +24,9 @@ jobs:
 
     - name: Build EXE with PyInstaller
       run: |
-        # 若你要黑視窗版本，用下面這行：
+        # 黑視窗版本
         pyinstaller --console --onefile Main.py
         dir dist
-        # 若你要無視窗版本，用下面這行：
-      # pyinstaller --noconsole --onefile Main.py
-        
-        
-        
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
@@ -44,7 +37,7 @@ jobs:
     - name: Create Release and Upload EXE
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: ${{ github.ref_name }}
+        tag_name: v202511301900  # 固定 tag
         files: dist/Main.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
