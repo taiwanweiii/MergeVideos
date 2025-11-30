@@ -44,7 +44,7 @@ jobs:
     - name: Create Release and Upload EXE
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: v202511301900
+        tag_name: ${{ github.ref_name }}
         files: dist/Main.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
