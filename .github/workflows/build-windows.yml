@@ -37,10 +37,19 @@ jobs:
       with:
         name: windows-exe
         path: dist/Main.exe
+        
+    - name: Create Tag
+      id: tag
+      run: |
+        TAG_NAME="v$(date +'%Y%m%d%H%M%S')"
+        echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+        git tag $TAG_NAME
+        git push origin $TAG_NAME
 
     - name: Create Release and Upload EXE
       uses: softprops/action-gh-release@v1
       with:
+        tag_name: ${{ env.TAG_NAME }}
         files: dist/Main.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
