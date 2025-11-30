@@ -35,10 +35,10 @@ jobs:
         path: dist/Main.exe
 
     - name: Create Release and Upload EXE
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: v202511301900  # 固定 tag
-        allow_updates: true   # 允許更新已存在 release
+        overwrite: true   # 覆蓋已存在 release
 
         files: dist/Main.exe
       env:
