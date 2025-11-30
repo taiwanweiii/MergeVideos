@@ -34,5 +34,5 @@ jobs:
         name: windows-build
         # 上傳整個資料夾，包含 EXE 與 resources
         path: |
-          dist/Main.exe
+          dist/Main/**
           resources/
