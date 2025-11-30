@@ -1,6 +1,9 @@
 import os
 import sys
 from moviepy.editor import *
+import tkinter as tk
+from tkinter import filedialog
+import traceback
 
 # ================= 設定區 (Mac 專用修訂版) =================
 # PyInstaller 會把程式打包成 exe，資源會放在 _MEIPASS
@@ -240,6 +243,22 @@ if __name__ == "__main__":
     print(">>> 程式將會走訪指定資料夾下的所有子資料夾，尋找並處理影片")
     print(">>> 處理完影片後會生成1_型號_合併完成.mp4的檔案")
     print(">>> 執行過程中請勿終止城市，以免產生不完整的檔案")
-    base_folder = input(">>> 請輸入資料夾位置: ")
-    input(">>> 按下任意鍵開始處理所有資料夾中的影片...")
-    process_all_folders(base_folder)
+    # base_folder = input(">>> 請輸入資料夾位置: ")
+    # input(">>> 按下任意鍵開始處理所有資料夾中的影片...")
+    # 隱藏 Tkinter 主視窗
+    root = tk.Tk()
+    root.withdraw()
+
+    # 選擇資料夾
+    base_folder = filedialog.askdirectory(title="請選擇資料夾")
+    if not base_folder:
+        print("沒有選擇資料夾，程式結束")
+        sys.exit(0)
+
+    try:
+        process_all_folders(base_folder)
+    except Exception as e:
+        print("程式發生錯誤：", e)
+        traceback.print_exc()
+    finally:
+        input("程式結束，按任意鍵退出...")

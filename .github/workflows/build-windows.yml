@@ -6,7 +6,6 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
     - name: Checkout repo
       uses: actions/checkout@v3
@@ -24,8 +23,9 @@ jobs:
 
     - name: Build EXE with PyInstaller
       run: |
-        # 黑視窗版本，EXE 不包含資源
-        pyinstaller --console Main.py
+        pyinstaller --onefile --console Main.py \
+          --add-data "resources/PingFang.ttc;resources" \
+          --add-data "resources/logo.png;resources"
         dir dist
 
     - name: Upload artifact
@@ -34,5 +34,5 @@ jobs:
         name: windows-build
         # 上傳整個資料夾，包含 EXE 與 resources
         path: |
-          dist/Main/**
+          dist/Main.exe
           resources/
